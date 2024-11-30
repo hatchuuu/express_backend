@@ -1,14 +1,20 @@
-import { createUser } from './../module/user.module';
-import { registerType, responseType } from "../types/types";
+import { createUser, readUsersByEmail } from './user.module';
+import { registerType, responseType } from "@/types/types";
 import { hash, genSalt } from 'bcrypt';
 
 export const addUser = async (data: registerType): Promise<responseType> => {
     try {
-        const { password } = data
+        const { password, email } = data
         const salt = await genSalt(10)
         const hashPassword = await hash(password, salt)
         const { password: _, ...newData } = data
         const updatedData = { ...newData, password: hashPassword }
+
+        const checkEmail = await readUsersByEmail(email)
+        if (checkEmail) return {
+            "status": 400,
+            "message": "Email was used by another user"
+        }
 
         const response = await createUser(updatedData)
         if (!response) return {
@@ -22,7 +28,7 @@ export const addUser = async (data: registerType): Promise<responseType> => {
     } catch (error) {
         return {
             "status": 400,
-            "message": error
+            "message": "Internal Server Error"
         }
     }
 }

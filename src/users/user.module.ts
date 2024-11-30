@@ -1,5 +1,5 @@
-import { registerType, userType } from './../types/types.d';
-import { prisma } from './../config/prisma';
+import { registerType, userType } from '@/types/types.d';
+import { prisma } from '@/config/prisma';
 
 export const createUser = async (data: registerType): Promise<boolean> => {
     try {

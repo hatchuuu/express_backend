@@ -1,6 +1,6 @@
-import { loginUser } from './../service/auth.service';
+import { loginUser } from './login.service';
 import { Request, Response } from "express"
-import { responseLogin } from '../types/types';
+import { responseLogin } from '@/types/types';
 
 export const loginController = async (req: Request, res: Response) => {
     const response: responseLogin = await loginUser(req.body)
@@ -10,8 +10,4 @@ export const loginController = async (req: Request, res: Response) => {
         httpOnly: true,
     })
     res.status(200).json({ "token": response.accessToken })
-}
-
-export const getTokenController = async (req: Request, res: Response) => {
-
 }

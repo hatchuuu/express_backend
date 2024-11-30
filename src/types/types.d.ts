@@ -1,6 +1,5 @@
-import { registerType } from "./types.d";
 import { z } from "zod";
-import { loginSchema, registerSchema } from "./../config/zod";
+import { loginSchema, registerSchema } from "@/config/zod";
 
 export type responseType = {
     status: number;

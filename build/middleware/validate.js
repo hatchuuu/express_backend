@@ -7,8 +7,8 @@ const validate = (schema) => {
         try {
             const validatedFields = schema.safeParse(req.body);
             if (!validatedFields.success) {
-                const dataError = validatedFields.error.errors.map((result) => ({
-                    fields: result.path[0],
+                const dataError = validatedFields.error.errors.map((result, i) => ({
+                    fields: result.path[i],
                     message: result.message
                 }));
                 res.status(400).json(dataError);

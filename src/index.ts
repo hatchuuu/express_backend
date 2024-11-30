@@ -1,10 +1,11 @@
-import { routes } from './../routes/index';
+import "./setup-alias"
+import { routes } from '@/routes/index';
 import express, { Application } from "express"
 import dotenv from "dotenv"
 
 const app: Application = express()
 dotenv.config()
-
+app.use(express.json())
 
 const port = process.env.PORT
 routes(app)

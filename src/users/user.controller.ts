@@ -1,4 +1,4 @@
-import { addUser } from './../service/user.service';
+import { addUser } from './user.service';
 import { Request, Response } from "express";
 
 export const postUserController = async (req: Request, res: Response) => {
